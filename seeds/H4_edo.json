@@ -1,0 +1,176 @@
+[
+  {
+    "type": "term_def",
+    "term": "関ヶ原の戦い",
+    "definition": "東軍徳川家康と西軍石田三成の戦い",
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "関ヶ原の戦い",
+    "year": 1600,
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "江戸幕府成立",
+    "definition": "徳川家康が征夷大将軍となり開幕",
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "江戸幕府成立（征夷大将軍）",
+    "year": 1603,
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "武家諸法度",
+    "definition": "大名統制の基本法令",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "参勤交代",
+    "definition": "大名が江戸と国元を往復する制度",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "鎖国",
+    "definition": "長崎など一部を除き外国貿易を制限",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "朱印船貿易",
+    "definition": "幕府が発行する許可状で行う海外貿易",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "出島",
+    "definition": "長崎の人工島。オランダ商館が置かれた",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "新田開発",
+    "definition": "江戸期に進んだ耕地の拡大",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "問屋制家内工業",
+    "definition": "問屋が原料・資金を貸し家内で生産",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "工場制手工業",
+    "definition": "分業で生産する手作業中心の工場",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "元禄文化",
+    "definition": "上方中心の町人文化",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "化政文化",
+    "definition": "江戸中心の町人文化",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "改革（享保・寛政・天保）",
+    "definition": "吉宗・松平定信・水野忠邦の三大改革",
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "生類憐みの令",
+    "year": 1687,
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "公武合体",
+    "definition": "幕末に朝廷と幕府の協調を図る政策",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "尊王攘夷",
+    "definition": "天皇を敬い外国勢力を排斥する思想",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "五箇条の御誓文",
+    "definition": "新政府の基本方針",
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "ペリー来航",
+    "year": 1853,
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "日米和親条約",
+    "year": 1854,
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "安政の五カ国条約",
+    "definition": "列強と結んだ不平等条約",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "江戸無血開城",
+    "definition": "西郷隆盛と勝海舟の会談で実現",
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "大政奉還",
+    "year": 1867,
+    "category": "H4"
+  },
+  {
+    "type": "event_year",
+    "term": "王政復古の大号令",
+    "year": 1867,
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "戊辰戦争",
+    "definition": "新政府軍と旧幕府勢力の内戦",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "版籍奉還",
+    "definition": "大名が領地と人民を国に返上",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "廃藩置県",
+    "definition": "藩を廃し県を置いた改革",
+    "category": "H4"
+  },
+  {
+    "type": "term_def",
+    "term": "四民平等",
+    "definition": "身分制度の廃止を指す近代化政策",
+    "category": "H4"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "type": "civics",
+    "term": "市場経済",
+    "definition": "需要と供給により価格が決まる仕組み",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "独占禁止法",
+    "definition": "公正な競争を保つための法律",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "消費者物価指数（CPI）",
+    "definition": "家計が購入する財・サービスの物価指標",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "国内総生産（GDP）",
+    "definition": "一定期間に国内で生産された付加価値の総和",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "景気循環",
+    "definition": "好況・後退・不況・回復の繰り返し",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "直接金融",
+    "definition": "株式や社債の発行で市場から資金調達",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "間接金融",
+    "definition": "銀行など金融機関を通じた資金仲介",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "円高",
+    "definition": "1ドルに必要な円が少なくなる状態",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "円安",
+    "definition": "1ドルに必要な円が多くなる状態",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "貿易黒字",
+    "definition": "輸出額が輸入額を上回る状態",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "関税",
+    "definition": "輸入品に課される税。保護と財源",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "WTO",
+    "definition": "多角的貿易体制の枠組みを担う国際機関",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "IMF",
+    "definition": "国際通貨基金。国際収支の支援など",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "世界銀行（IBRD）",
+    "definition": "途上国の開発を支援する国際機関",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "需要の価格弾力性",
+    "definition": "価格の変化に対する需要の反応度合い",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "租税",
+    "definition": "国や地方が財政収入として徴収する金",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "直接税",
+    "definition": "納税者と担税者が同じ税（所得税など）",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "間接税",
+    "definition": "消費段階で広く課税（消費税など）",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "景気対策（財政政策）",
+    "definition": "公共事業や減税で需要を刺激する政策",
+    "category": "C2"
+  },
+  {
+    "type": "civics",
+    "term": "金融政策",
+    "definition": "中央銀行が金利や通貨量を調整する政策",
+    "category": "C2"
+  }
+]

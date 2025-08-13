@@ -1,0 +1,176 @@
+[
+  {
+    "type": "term_def",
+    "term": "源頼朝",
+    "definition": "鎌倉幕府を開いた武将",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "御家人",
+    "definition": "将軍に奉公し御恩を受ける武士",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "守護",
+    "definition": "国ごとの軍事・警察を担当する役職",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "地頭",
+    "definition": "荘園・公領の管理を行う武士",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "執権政治",
+    "definition": "北条氏が将軍を補佐し実権を握る",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "御成敗式目",
+    "definition": "武家法の基本法典",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "元寇",
+    "definition": "蒙古襲来。文永・弘安の二度",
+    "category": "H3"
+  },
+  {
+    "type": "event_year",
+    "term": "文永の役",
+    "year": 1274,
+    "category": "H3"
+  },
+  {
+    "type": "event_year",
+    "term": "弘安の役",
+    "year": 1281,
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "守護大名",
+    "definition": "地方で力を持った武士。戦国大名へ発展",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "建武の新政",
+    "definition": "後醍醐天皇が行った親政",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "南北朝の動乱",
+    "definition": "朝廷が南朝・北朝に分裂した内乱",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "足利尊氏",
+    "definition": "室町幕府を開いた人物",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "管領",
+    "definition": "将軍を補佐する役職（細川・斯波・畠山）",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "応仁の乱",
+    "definition": "戦国時代のきっかけとなった争乱",
+    "category": "H3"
+  },
+  {
+    "type": "event_year",
+    "term": "応仁の乱",
+    "year": 1467,
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "一向一揆",
+    "definition": "浄土真宗門徒が蜂起した一揆",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "自治都市（堺・博多）",
+    "definition": "商人・豪商が自治を行った都市",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "銀閣",
+    "definition": "東山文化を代表する建築",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "連歌",
+    "definition": "室町文化で発展した文学",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "書院造",
+    "definition": "武家住宅の建築様式",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "戦国大名",
+    "definition": "領国を支配した有力武将",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "楽市・楽座",
+    "definition": "座や関所を廃止し商業を活発化",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "鉄砲伝来",
+    "definition": "ポルトガル人が種子島に伝えた火器",
+    "category": "H3"
+  },
+  {
+    "type": "event_year",
+    "term": "鉄砲伝来",
+    "year": 1543,
+    "category": "H3"
+  },
+  {
+    "type": "event_year",
+    "term": "キリスト教伝来",
+    "year": 1549,
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "南蛮貿易",
+    "definition": "ポルトガル・スペインとの貿易",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "桃山文化",
+    "definition": "豪壮華麗な文化。城郭・障壁画など",
+    "category": "H3"
+  },
+  {
+    "type": "term_def",
+    "term": "関所",
+    "definition": "人や物資の通行を取り締まる施設",
+    "category": "H3"
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "type": "geo_match",
+    "term": "日本海側気候",
+    "definition": "冬に雪が多く、夏は比較的涼しい",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "太平洋側気候",
+    "definition": "冬は乾燥し晴天が多い、夏は雨が多い",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "瀬戸内海式気候",
+    "definition": "雨が少なく温暖で日照が多い",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "中央高地の気候",
+    "definition": "年較差が大きく、降水は少なめ",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "親潮（千島海流）",
+    "definition": "寒流。栄養豊富で好漁場を形成",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "黒潮（日本海流）",
+    "definition": "暖流。太平洋側を北上",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "対馬海流",
+    "definition": "日本海を北上する暖流",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "リアス海岸",
+    "definition": "出入りの多い沈水海岸地形",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "石狩平野",
+    "definition": "北海道最大の平野。稲作が盛ん",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "越後平野",
+    "definition": "新潟県の大平野。米どころ",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "関東平野",
+    "definition": "日本最大の平野。首都圏を含む",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "筑紫平野",
+    "definition": "九州北西部の平野。麦・い草など",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "濃尾平野",
+    "definition": "木曽三川が形成。養老・輪中が特徴",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "瀬戸内工業地域",
+    "definition": "自動車・造船・化学などの工業集積",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "太平洋ベルト",
+    "definition": "関東〜北九州の工業密集地帯",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "兼六園",
+    "definition": "金沢市の大名庭園（日本三名園）",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "九谷焼",
+    "definition": "加賀の色絵磁器",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "阿蘇山",
+    "definition": "世界有数のカルデラを持つ火山",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "白神山地",
+    "definition": "ブナ原生林で世界遺産",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "白川郷合掌造り",
+    "definition": "豪雪に適した急勾配の屋根",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "三陸沖漁場",
+    "definition": "親潮と黒潮の潮目で良漁場",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "北陸新幹線",
+    "definition": "北陸地方と首都圏を結ぶ高速鉄道",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "関門海峡",
+    "definition": "本州と九州を隔てる海峡",
+    "category": "G1"
+  },
+  {
+    "type": "geo_match",
+    "term": "紀伊山地",
+    "definition": "多雨で森林資源が豊富",
+    "category": "G1"
+  }
+]

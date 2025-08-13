@@ -1,0 +1,152 @@
+[
+  {
+    "type": "geo_match",
+    "term": "アンデス山脈",
+    "definition": "南米西岸を南北に走る長大な山脈",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ロッキー山脈",
+    "definition": "北米西部の大山脈",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ヒマラヤ山脈",
+    "definition": "世界最高峰エベレストを含む",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "サハラ砂漠",
+    "definition": "世界最大級の砂漠。アフリカ北部",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ゴビ砂漠",
+    "definition": "中国とモンゴルにまたがる砂漠",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ナイル川",
+    "definition": "世界最長級の大河。エジプト文明",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "アマゾン川",
+    "definition": "世界最大級の流量を誇る大河",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "地中海性気候",
+    "definition": "夏乾燥・冬雨。オリーブ・ぶどう",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "西岸海洋性気候",
+    "definition": "偏西風の影響で年較差が小さい",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "サバナ気候",
+    "definition": "雨季と乾季がある草原気候",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "砂漠気候",
+    "definition": "降水量が極端に少ない乾燥気候",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "モンスーン気候",
+    "definition": "季節風の影響が大きいアジアの気候",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "シリコンバレー",
+    "definition": "米国西海岸のICT集積地域",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ルール工業地帯",
+    "definition": "ドイツの重化学工業地帯",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "EU",
+    "definition": "ヨーロッパの地域統合。単一市場",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ASEAN",
+    "definition": "東南アジア諸国連合",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "BRICS",
+    "definition": "新興経済大国の総称",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "OPEC",
+    "definition": "石油輸出国機構",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "五大湖",
+    "definition": "北米にある巨大な淡水湖群",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "グレートバリアリーフ",
+    "definition": "豪州北東岸のサンゴ礁地帯",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "メコン川",
+    "definition": "東南アジアを流れる大河",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "アラビア半島",
+    "definition": "中東の大半を占める半島。産油国多い",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "チベット高原",
+    "definition": "「世界の屋根」と呼ばれる高原",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "ナミブ砂漠",
+    "definition": "アフリカ南西部の海岸砂漠",
+    "category": "G2"
+  },
+  {
+    "type": "geo_match",
+    "term": "パンパ",
+    "definition": "アルゼンチンの穀倉地帯",
+    "category": "G2"
+  }
+]

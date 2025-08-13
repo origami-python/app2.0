@@ -1,0 +1,122 @@
+[
+  {
+    "type": "civics",
+    "term": "日本国憲法の基本原則",
+    "definition": "国民主権・基本的人権の尊重・平和主義",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "国民主権",
+    "definition": "政治の最終的な決定権が国民にある",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "平和主義",
+    "definition": "戦争の放棄・戦力不保持・交戦権否認（9条）",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "生存権",
+    "definition": "健康で文化的な最低限度の生活（25条）",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "表現の自由",
+    "definition": "検閲の禁止、通信の秘密（21条）",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "幸福追求権",
+    "definition": "個人の尊重に基づく権利（13条）",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "三権分立",
+    "definition": "立法・行政・司法が互いに抑制と均衡",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "議院内閣制",
+    "definition": "内閣が国会に連帯責任を負う制度",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "司法権の独立",
+    "definition": "裁判官は良心に従い独立して職権を行使",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "違憲立法審査権",
+    "definition": "裁判所が法律の合憲性を判断できる権限",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "地方自治の本旨",
+    "definition": "住民自治と団体自治",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "条例",
+    "definition": "地方公共団体が定める決まり",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "小選挙区制",
+    "definition": "1選挙区から1名を選ぶ制度",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "比例代表制",
+    "definition": "政党に投票し得票に比例して議席配分",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "内閣不信任案",
+    "definition": "可決されると内閣は総辞職か衆議院解散",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "国会の二院制",
+    "definition": "衆議院と参議院で構成",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "裁判の公開",
+    "definition": "裁判は公開が原則。秘密裁判の禁止",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "国民審査",
+    "definition": "最高裁判所裁判官の適否を国民が審査",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "政令",
+    "definition": "内閣が制定する命令",
+    "category": "C1"
+  },
+  {
+    "type": "civics",
+    "term": "行政手続法",
+    "definition": "行政処分や申請手続きを透明化する法律",
+    "category": "C1"
+  }
+]

@@ -1,0 +1,206 @@
+[
+  {
+    "type": "event_year",
+    "term": "明治維新",
+    "year": 1868,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "地租改正",
+    "year": 1873,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "富国強兵",
+    "definition": "近代国家建設のための政策スローガン",
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "殖産興業",
+    "definition": "産業育成のため官営工場などを整備",
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "学制",
+    "definition": "近代的な学校制度の整備",
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "徴兵令",
+    "definition": "国民皆兵の原則に基づく制度",
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "自由民権運動",
+    "definition": "国会開設と憲法制定を求める運動",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "大日本帝国憲法発布",
+    "year": 1889,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "帝国議会開設",
+    "year": 1890,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "日清戦争",
+    "year": 1894,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "下関条約",
+    "year": 1895,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "日露戦争",
+    "year": 1904,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "ポーツマス条約",
+    "year": 1905,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "大正デモクラシー",
+    "definition": "大正期の民主主義的な風潮",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "米騒動",
+    "year": 1918,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "関東大震災",
+    "year": 1923,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "世界恐慌",
+    "year": 1929,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "満州事変",
+    "definition": "1931年の柳条湖事件に端を発した",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "満州事変",
+    "year": 1931,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "日中戦争",
+    "year": 1937,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "太平洋戦争開戦",
+    "year": 1941,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "ポツダム宣言受諾",
+    "year": 1945,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "日本国憲法施行",
+    "year": 1947,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "農地改革",
+    "definition": "自作農創出のための土地解放政策",
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "サンフランシスコ平和条約",
+    "definition": "日本の主権回復につながった講和条約（1951）",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "サンフランシスコ平和条約",
+    "year": 1951,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "高度経済成長",
+    "definition": "1950年代後半〜1973年の経済急成長",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "東京オリンピック",
+    "year": 1964,
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "沖縄返還",
+    "year": 1972,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "バブル経済",
+    "definition": "1980年代後半の資産価格高騰期",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "消費税導入",
+    "year": 1989,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "リーマンショック",
+    "definition": "2008年の世界金融危機",
+    "category": "H5"
+  },
+  {
+    "type": "event_year",
+    "term": "東日本大震災",
+    "year": 2011,
+    "category": "H5"
+  },
+  {
+    "type": "term_def",
+    "term": "少子高齢化",
+    "definition": "出生率低下と高齢者比率上昇の進行",
+    "category": "H5"
+  }
+]

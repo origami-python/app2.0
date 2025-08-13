@@ -1,0 +1,92 @@
+[
+  {
+    "type": "geo_match",
+    "term": "人口ピラミッド（日本型）",
+    "definition": "高齢化が進み上部がふくらむ形",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "一次産業比率が高い地域",
+    "definition": "農林水産業の就業割合が高い",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "第三次産業の都市集中",
+    "definition": "情報・金融・サービスが大都市に集中",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "CO2排出量の多い国",
+    "definition": "人口・産業規模が大きい国で高い傾向",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "フードマイレージ",
+    "definition": "食料の輸送距離と量の積",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "再生可能エネルギー比率",
+    "definition": "水力・風力・太陽光などの比率",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "合計特殊出生率の低下",
+    "definition": "少子化の指標となる値の低下",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "都市への人口集中",
+    "definition": "過密と過疎の地域差が生まれる",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "購買力平価（PPP）",
+    "definition": "各国の物価水準で調整した所得指標",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "HDI（人間開発指数）",
+    "definition": "健康・教育・所得で人間開発の度合い",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "避難階層化マップ",
+    "definition": "災害時の危険度を地図化した資料",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "時差計算",
+    "definition": "経度差から時刻差を求める資料読解",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "等高線",
+    "definition": "同じ高さを結んだ線。地形の起伏を示す",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "雨温図の読み取り",
+    "definition": "月別降水量と気温から気候を判定",
+    "category": "M1"
+  },
+  {
+    "type": "geo_match",
+    "term": "人口密度の計算",
+    "definition": "人口÷面積で求める数値",
+    "category": "M1"
+  }
+]

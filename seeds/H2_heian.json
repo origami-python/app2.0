@@ -1,0 +1,122 @@
+[
+  {
+    "type": "term_def",
+    "term": "平安京遷都",
+    "definition": "桓武天皇が都を長岡→平安へ移した",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "摂関政治",
+    "definition": "藤原氏が摂政・関白として政治を主導",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "藤原道長",
+    "definition": "摂関政治の最盛期を築いた貴族",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "国風文化",
+    "definition": "かな文字の発達に代表される日本風文化",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "枕草子",
+    "definition": "清少納言の随筆",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "源氏物語",
+    "definition": "紫式部が著した長編物語",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "仮名文字",
+    "definition": "平仮名・片仮名の総称",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "院政",
+    "definition": "上皇が政治の実権を握る政治形態",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "保元の乱",
+    "definition": "崇徳上皇側と後白河天皇側の争い",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "平治の乱",
+    "definition": "源平が対立した武士政権の前段",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "平清盛",
+    "definition": "日宋貿易を推進した武士",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "大輪田泊",
+    "definition": "平清盛が整備した港（神戸）",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "日宋貿易",
+    "definition": "宋銭・陶磁器などが輸入された貿易",
+    "category": "H2"
+  },
+  {
+    "type": "event_year",
+    "term": "平等院鳳凰堂の建立",
+    "year": 1053,
+    "category": "H2"
+  },
+  {
+    "type": "event_year",
+    "term": "平安京遷都",
+    "year": 794,
+    "category": "H2"
+  },
+  {
+    "type": "event_year",
+    "term": "保元の乱",
+    "year": 1156,
+    "category": "H2"
+  },
+  {
+    "type": "event_year",
+    "term": "平治の乱",
+    "year": 1159,
+    "category": "H2"
+  },
+  {
+    "type": "event_year",
+    "term": "壇ノ浦の戦い",
+    "year": 1185,
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "荘園公領制",
+    "definition": "荘園と公領（国衙領）の二元的支配",
+    "category": "H2"
+  },
+  {
+    "type": "term_def",
+    "term": "惣領制",
+    "definition": "武士の一族組織で家督を惣領が継承",
+    "category": "H2"
+  }
+]

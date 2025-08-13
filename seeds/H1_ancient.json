@@ -1,0 +1,184 @@
+[
+  {
+    "type": "term_def",
+    "term": "縄文土器",
+    "definition": "縄の目の文様をもつ厚手の土器",
+    "category": "H1",
+    "hint": "煮炊き向き"
+  },
+  {
+    "type": "term_def",
+    "term": "弥生土器",
+    "definition": "薄手で赤褐色の実用的な土器",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "稲作",
+    "definition": "弥生時代に大陸から伝わった米作り",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "高床倉庫",
+    "definition": "害獣や湿気を避けて穀物を保存する倉庫",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "金印",
+    "definition": "漢が倭奴国王に与えた印章",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "古墳",
+    "definition": "権力者の墓として築かれた大規模な墳丘",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "前方後円墳",
+    "definition": "前が方形・後ろが円形の古墳形状",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "大王（おおきみ）",
+    "definition": "大和政権の首長の称",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "渡来人",
+    "definition": "大陸から技術や文化を伝えた人々",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "仏教伝来",
+    "definition": "6世紀中ごろ百済から伝わった宗教",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "蘇我氏",
+    "definition": "飛鳥時代に勢力を持った豪族",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "聖徳太子",
+    "definition": "冠位十二階・十七条の憲法を定めた人物",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "冠位十二階",
+    "definition": "徳・仁などの徳目で位を表す制度",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "十七条の憲法",
+    "definition": "和を尊び礼を重んずる役人の心得",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "大化の改新",
+    "definition": "蘇我氏を倒して中央集権化を進めた改革",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "公地公民",
+    "definition": "土地・人民を国家が支配する原則",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "戸籍",
+    "definition": "人民把握のための台帳制度",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "班田収授法",
+    "definition": "口分田を与え死ねば返す制度",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "口分田",
+    "definition": "律令制で6歳以上に支給された田地",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "墾田永年私財法",
+    "definition": "新たに開墾した土地の私有を認めた法",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "荘園",
+    "definition": "貴族や寺社の私有地",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "東大寺大仏",
+    "definition": "聖武天皇の命で造立された仏像",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "鑑真",
+    "definition": "唐の僧。日本に戒律を伝えた",
+    "category": "H1"
+  },
+  {
+    "type": "term_def",
+    "term": "国分寺・国分尼寺",
+    "definition": "天平文化期に各国に設けられた寺院",
+    "category": "H1"
+  },
+  {
+    "type": "event_year",
+    "term": "大化の改新",
+    "year": 645,
+    "category": "H1",
+    "hint": "蘇我氏の滅亡"
+  },
+  {
+    "type": "event_year",
+    "term": "白村江の戦い",
+    "year": 663,
+    "category": "H1"
+  },
+  {
+    "type": "event_year",
+    "term": "壬申の乱",
+    "year": 672,
+    "category": "H1"
+  },
+  {
+    "type": "event_year",
+    "term": "墾田永年私財法",
+    "year": 743,
+    "category": "H1"
+  },
+  {
+    "type": "event_year",
+    "term": "東大寺大仏開眼",
+    "year": 752,
+    "category": "H1"
+  },
+  {
+    "type": "event_year",
+    "term": "平城京遷都",
+    "year": 710,
+    "category": "H1"
+  }
+]
