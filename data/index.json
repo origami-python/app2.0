@@ -1,0 +1,5 @@
+[
+  { "pack": "001_core_ishikawa", "title": "石川県コア100", "count": 100, "domain": ["歴史","地理","公民"], "recommended": true },
+  { "pack": "006_civics_const",  "title": "公民（憲法・選挙）40", "count": 40, "domain": ["公民"] },
+  { "pack": "007_civics_econ",   "title": "公民（経済・税・金融）40", "count": 40, "domain": ["公民"] }
+]

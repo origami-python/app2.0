@@ -1,0 +1,16 @@
+{
+  "name": "社会クイズ v2.0",
+  "short_name": "社クイズ2",
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#1a73e8",
+  "background_color": "#0e0e0e",
+  "icons": [
+    {
+      "src": "./assets/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

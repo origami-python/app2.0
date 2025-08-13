@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>社会クイズ v2.0</title>
+<meta name="theme-color" content="#1a73e8">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./assets/icon512.png">
+<style>
+  :root{ --bg:#111; --card:#1b1b1b; --ink:#f7f7f7; --sub:#c7c7c7; --acc:#1a73e8; --ok:#1fa83b; --ng:#e53935; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",Arial;}
+  header,footer{position:sticky;z-index:5;background:#0e0e0e;border-bottom:1px solid #222}
+  header{top:0} footer{bottom:0;border-top:1px solid #222;border-bottom:none}
+  .bar{max-width:980px;margin:0 auto;padding:10px 12px;display:flex;align-items:center;gap:8px}
+  .title{font-weight:800}
+  .main{max-width:980px;margin:12px auto 88px;padding:0 12px;display:grid;gap:12px;grid-template-columns:1fr; }
+  @media(min-width:920px){ .main{ grid-template-columns:1.3fr .7fr; } }
+  .card{background:var(--card);border:1px solid #222;border-radius:10px;padding:12px}
+  .row{display:flex;flex-wrap:wrap;gap:8px}
+  button{background:#222;border:1px solid #333;color:#fff;padding:10px 12px;border-radius:8px;cursor:pointer}
+  .primary{background:var(--acc);border-color:#0f5dc9}
+  .ghost{background:#191919}
+  .ok{color:var(--ok)} .ng{color:var(--ng)}
+  .qimg{max-height:220px;width:100%;object-fit:cover;border-radius:8px;border:1px solid #333;display:none}
+  .opt{padding:10px;border:1px solid #333;border-radius:8px;cursor:pointer;background:#141414}
+  .opt.correct{background:#112417;border-color:#204d2a}
+  .opt.incorrect{background:#2a1313;border-color:#5a1f1f}
+  .tiny{color:var(--sub);font-size:12px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid #333;border-radius:999px;background:#161616;color:#ddd;text-decoration:none}
+  .list{display:grid;gap:8px;max-height:320px;overflow:auto}
+  .kpi{background:#0e0e0e;border:1px solid #222;border-radius:8px;padding:8px}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+  .dialog{max-width:900px;width:92%;max-height:85vh;overflow:auto;background:#0e0e0e;border:1px solid #222;border-radius:12px;padding:12px}
+  .pack{display:flex;align-items:center;gap:8px;padding:8px;border:1px solid #333;border-radius:8px;background:#141414}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="title">📘 社会クイズ v2.0</div>
+    <div style="margin-left:auto" class="row">
+      <button id="refreshBtn" class="ghost">ローカル読込</button>
+      <button id="updateBtn" class="primary">オンライン更新（Wikipedia）</button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <section class="card" id="left"></section>
+  <aside class="card" id="right">
+    <h3>パック</h3>
+    <div id="packs" class="list tiny"></div>
+  </aside>
+</main>
+
+<footer>
+  <div class="bar tiny">
+    <div>データ：<code>data/packs/*.json</code>（パック）＋ <code>Wikipedia REST</code>（任意）</div>
+  </div>
+</footer>
+
+<!-- 採点モーダル -->
+<div id="resultOverlay" class="overlay" aria-hidden="true">
+  <div class="dialog">
+    <h3>学習結果（今回）</h3>
+    <div id="sum" class="row" style="margin:8px 0"></div>
+    <div id="hist" class="list tiny"></div>
+    <div class="row" style="justify-content:end;margin-top:10px">
+      <button class="ghost" id="closeResult">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ----- PWA ----- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(console.warn));
+}
+
+/* ----- State / Storage ----- */
+const APP='socquiz_v2';
+const store = {
+  data: JSON.parse(localStorage.getItem(APP) || '{"cards":[],"stats":{"answered":0,"correct":0,"streak":0,"points":0},"session":[]}'),
+  save(){ localStorage.setItem(APP, JSON.stringify(this.data)); },
+  reset(){ localStorage.removeItem(APP); location.reload(); }
+};
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a;}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function pct(a,b){return !b?0:Math.round(a/b*100);}
+
+/* ----- Pack List ----- */
+async function loadPackIndex(){
+  try{
+    const res = await fetch('./data/index.json?v='+Date.now(), {cache:'no-store'});
+    if(!res.ok) throw 0;
+    return await res.json();
+  }catch{ return []; }
+}
+async function loadPacks(selected){
+  const base = './data/packs/';
+  const loaded=[];
+  for(const pack of selected){
+    const url = `${base}${pack}.json?v=${Date.now()}`;
+    try{
+      const res = await fetch(url, {cache:'no-store'});
+      if(!res.ok) continue;
+      const arr = await res.json();
+      loaded.push(...arr);
+    }catch{}
+  }
+  // merge
+  const ids = new Set((store.data.cards||[]).map(c=>String(c.id)));
+  const add = loaded.filter(q=>!ids.has(String(q.id))).map(q=>({
+    id:q.id, domain:q.domain||'総合', question_type:q.question_type||'mc',
+    question:q.question, choices:q.choices, answer:q.answer,
+    explanation:q.explanation||'', image:q.image||null,
+    source:q.source||{type:'pack',note:'packs'}, tags:q.tags||[]
+  }));
+  store.data.cards.push(...add); store.save();
+  return add.length;
+}
+async function renderPackUI(){
+  const list = await loadPackIndex();
+  const el = document.getElementById('packs');
+  el.innerHTML = list.length ? '' : '<div>data/index.json が見つかりません</div>';
+  list.forEach(p=>{
+    const id='pack_'+p.pack;
+    el.insertAdjacentHTML('beforeend', `
+      <label class="pack">
+        <input type="checkbox" id="${id}" data-pack="${p.pack}" ${p.recommended?'checked':''}>
+        <div><b>${esc(p.title)}</b><br><span class="tiny">${esc(p.pack)} / ${p.count}問</span></div>
+      </label>
+    `);
+  });
+  const btn = document.createElement('button');
+  btn.textContent='選択パックを読み込む';
+  btn.className='primary';
+  btn.onclick = async()=>{
+    const packs=[...document.querySelectorAll('[id^="pack_"]:checked')].map(x=>x.dataset.pack);
+    const n = await loadPacks(packs);
+    if(n>0){ buildQueue(); mountQuestion(); alert(`${n}問を読み込みました`); }
+    else{ alert('新しく読み込める問題がありません'); }
+  };
+  el.appendChild(btn);
+}
+
+/* ----- Wikipedia オンライン更新 ----- */
+const BOOST_TERMS = [
+  '律令制','口分田','平清盛','日宋貿易','元寇','文永の役','弘安の役','町衆',
+  '問屋制家内工業','琵琶湖','パリ協定','社会保障','固定資産税','女性参政権',
+  'ABCD包囲網','京都議定書','三権分立','国民投票','小選挙区制','比例代表制',
+  'アンデス山脈','リマン海流','季節風','憲法改正','直接金融','公企業'
+];
+async function fetchWiki(term){
+  const url = `https://ja.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term)}`;
+  const res = await fetch(url, {headers:{accept:'application/json'}});
+  if(!res.ok) throw new Error('wiki error');
+  const j = await res.json();
+  return {
+    title: j.title||term,
+    extract: (j.extract||'').replace(/\s+/g,' ').trim(),
+    url: j.content_urls?.desktop?.page || `https://ja.wikipedia.org/wiki/${encodeURIComponent(term)}`,
+    thumb: j.thumbnail?.source || null
+  };
+}
+function genMCFromSummary(term, sum){
+  const sent = (sum.extract||'').split('。')[0]||`${term}に関する基礎語句。`;
+  const pool = BOOST_TERMS.filter(t=>t!==term);
+  const distractors = shuffle(pool).slice(0,3);
+  const choices = shuffle([term, ...distractors]);
+  return {
+    id: `web_${term}_${Math.random().toString(36).slice(2,7)}`,
+    domain: '自動',
+    question_type: 'mc',
+    question: `${sent} ……この説明に当てはまる語句は？`,
+    choices, answer: term,
+    explanation: `出典: Wikipedia「${sum.title}」要約から自動生成`,
+    image: sum.thumb, source: {type:'url', url: sum.url}
+  };
+}
+async function onlineUpdate(seedTerms=BOOST_TERMS){
+  const results = [];
+  for(const t of seedTerms){
+    try{
+      const s = await fetchWiki(t);
+      results.push( genMCFromSummary(t, s) );
+    }catch(e){}
+    if(results.length>=20) break;
+  }
+  const ids = new Set((store.data.cards||[]).map(c=>c.id));
+  const add = results.filter(q=>!ids.has(q.id));
+  store.data.cards.push(...add);
+  store.save();
+  alert(`オンライン更新：${add.length}問を追加しました（Wikipedia要約）`);
+  render();
+}
+
+/* ----- Quiz Engine ----- */
+let queue=[], current=null;
+function buildQueue(){ queue = shuffle([...store.data.cards]).slice(0,30); }
+function mountQuestion(){
+  const L=document.getElementById('left');
+  if(!current){ current = queue.shift() || store.data.cards[Math.floor(Math.random()*store.data.cards.length)]; }
+  const c=current;
+  const ops = Array.isArray(c.choices)
+    ? c.choices.map(ch=>`<label class="opt"><input type="radio" name="choice" value="${esc(ch)}"> ${esc(ch)}</label>`).join('')
+    : `<input id="free" type="text" placeholder="解答を入力">`;
+  L.innerHTML = `
+    <div class="tiny">出典: ${esc(c.source?.url||c.source?.note||'local')}</div>
+    <h3 style="margin:.2rem 0 0.8rem">${esc(c.question)}</h3>
+    <img class="qimg" id="qimg" src="${c.image||''}" style="display:${c.image?'block':'none'}">
+    <div id="ops" class="list">${ops}</div>
+    <div class="row" style="margin-top:10px">
+      <button class="primary" id="answerBtn">回答する</button>
+      <button class="ghost" id="skipBtn">スキップ</button>
+      <button class="pill" id="gradeBtn">採点する</button>
+      ${c.source?.url?`<a class="pill" href="${c.source.url}" target="_blank" rel="noopener">参考リンク</a>`:''}
+    </div>
+    <div id="fb" style="margin-top:10px"></div>
+  `;
+  renderRight();
+  document.getElementById('answerBtn').onclick = checkAnswer;
+  document.getElementById('skipBtn').onclick   = ()=>{ current=null; mountQuestion(); };
+  document.getElementById('gradeBtn').onclick  = openResults;
+}
+function checkAnswer(){
+  const c=current; const fb=document.getElementById('fb');
+  let ua='';
+  if(document.querySelector('input[name="choice"]')){
+    const sel = document.querySelector('input[name="choice"]:checked');
+    if(!sel){ fb.innerHTML='<div class="tiny">選択肢を選んでね。</div>'; return; }
+    ua = sel.value;
+    document.querySelectorAll('.opt').forEach(el=>{
+      const v = el.querySelector('input').value;
+      el.classList.toggle('correct', v===c.answer);
+      if(v===ua && ua!==c.answer) el.classList.add('incorrect');
+      el.querySelector('input').disabled = true;
+    });
+  }else{
+    ua = (document.getElementById('free').value||'').trim();
+  }
+  const ok = String(ua)===String(c.answer);
+  if(ok){ store.data.stats.correct++; store.data.stats.streak++; store.data.stats.points+=10; } else { store.data.stats.streak=0; }
+  store.data.stats.answered++;
+  store.data.session.push({q:c.question, ua, ans:c.answer, ok, explain:c.explanation||'', src:c.source?.url||c.source?.note||''});
+  store.save();
+  fb.innerHTML = `
+    <div class="${ok?'ok':'ng'}">${ok?'🎉 正解！ +10pt':'💡 不正解……'}</div>
+    <div class="tiny">解説：${esc(c.explanation||'—')}</div>
+    <div class="row" style="margin-top:10px">
+      <button class="primary" id="nextBtn">次の問題へ</button>
+      <button class="ghost" id="gradeNowBtn">採点する</button>
+    </div>
+  `;
+  document.getElementById('nextBtn').onclick=()=>{ current=null; mountQuestion(); };
+  document.getElementById('gradeNowBtn').onclick=openResults;
+  renderRight();
+}
+function renderRight(){
+  const s=store.data.stats, R=document.getElementById('right');
+  const packZone = document.getElementById('packs');
+  R.innerHTML = `
+    <h3>進捗</h3>
+    <div class="row">
+      <div class="kpi">解いた数：${s.answered}</div>
+      <div class="kpi">正解数：${s.correct}</div>
+      <div class="kpi">正答率：${pct(s.correct, s.answered)}%</div>
+      <div class="kpi">連続正解：${s.streak}</div>
+      <div class="kpi">ポイント：${s.points}</div>
+    </div>
+    <h3 style="margin-top:12px">操作</h3>
+    <div class="row">
+      <button class="ghost" onclick="store.reset()">全データ削除</button>
+      <button class="ghost" id="backup">バックアップ</button>
+      <input type="file" id="restoreFile" style="display:none" accept="application/json">
+      <button class="ghost" id="restoreBtn">復元</button>
+    </div>
+    <h3 style="margin-top:12px">パック</h3>
+    <div id="packs" class="list tiny"></div>
+  `;
+  document.getElementById('backup').onclick=()=>{
+    const blob = new Blob([JSON.stringify(store.data,null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='socquiz_v2_backup.json'; a.click();
+  };
+  document.getElementById('restoreBtn').onclick=()=>{
+    const f=document.getElementById('restoreFile'); f.onchange=()=>{
+      const file=f.files[0]; const r=new FileReader();
+      r.onload=()=>{ try{ store.data=JSON.parse(r.result); store.save(); location.reload(); }catch{ alert('復元失敗'); } };
+      r.readAsText(file);
+    }; f.click();
+  };
+  renderPackUI();
+}
+
+/* ----- Results Modal ----- */
+function openResults(){
+  const ov=document.getElementById('resultOverlay'), sum=document.getElementById('sum'), hist=document.getElementById('hist');
+  const S=store.data.stats, H=store.data.session;
+  sum.innerHTML = `<div class="kpi">今回の問題数：${H.length}</div>
+                   <div class="kpi">正解：${H.filter(x=>x.ok).length}</div>
+                   <div class="kpi">正答率：${pct(H.filter(x=>x.ok).length,H.length)}%</div>`;
+  hist.innerHTML = H.length? H.map((r,i)=>`<div><strong>${i+1}. ${esc(r.q)}</strong><br>あなた：${esc(r.ua||'—')} / 正解：${esc(r.ans)}<br>解説：${esc(r.explain||'—')} ${r.src?`<a class="pill" href="${r.src}" target="_blank" rel="noopener">参考</a>`:''}</div>`).join('') : '<div>まだ回答がありません。</div>';
+  ov.style.display='flex'; ov.setAttribute('aria-hidden','false');
+  document.getElementById('closeResult').onclick=()=>{ ov.style.display='none'; ov.setAttribute('aria-hidden','true'); };
+}
+
+/* ----- Boot ----- */
+document.getElementById('refreshBtn').onclick = ()=>{ if(store.data.cards.length){ buildQueue(); mountQuestion(); } else { alert('まずは右の「選択パックを読み込む」を押してください'); } };
+document.getElementById('updateBtn').onclick  = ()=> onlineUpdate();
+(function init(){ renderRight(); })();
+</script>
+</body>
+</html>
