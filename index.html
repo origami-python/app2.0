@@ -3,71 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>社会クイズ v2.0 + Retro</title>
+<title>社会クイズ v2.1（H1〜H5拡張）</title>
 <meta name="theme-color" content="#d71a1a">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./assets/icon512.png">
 <style>
-  /* ===== Retro (FC風) 配色・フォント・ドットUI ===== */
   @font-face{
-    font-family: "PressStart";
-    src: local(""), url("https://fonts.gstatic.com/s/pressstart2p/v15/e3t4euO8T-267oIAQAu6jDQyK3nYhD8.woff2") format("woff2");
-    font-display: swap;
+    font-family:"PressStart";
+    src:url("https://fonts.gstatic.com/s/pressstart2p/v15/e3t4euO8T-267oIAQAu6jDQyK3nYhD8.woff2") format("woff2");
+    font-display:swap;
   }
   :root{
     --bg:#0c0c0c; --card:#141414; --ink:#f2f2f2; --sub:#bfbfbf;
-    --acc:#d71a1a; --ok:#2ecc40; --ng:#ff4136; --edge:#2a2a2a; --scan:#2e2e2e;
-    --pix:3px;
+    --acc:#d71a1a; --ok:#2ecc40; --ng:#ff4136; --edge:#2a2a2a;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; background:repeating-linear-gradient(0deg,#0c0c0c 0,#0c0c0c 2px,#0d0d0d 2px,#0d0d0d 4px);
-    color:var(--ink); font:15px/1.7 "Noto Sans JP",system-ui,Segoe UI,Arial;
-  }
-  .crt::before{ /* CRTスキャン風 */
-    content:""; position:fixed; inset:0; pointer-events:none; mix-blend-mode:soft-light;
-    background:linear-gradient(0deg,rgba(255,255,255,.02) 0,rgba(0,0,0,0) 50%,rgba(255,255,255,.02) 100%);
-    background-size:100% 3px;
-  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0;background:#0c0c0c;color:var(--ink);font:15px/1.7 "Noto Sans JP",system-ui,Segoe UI,Arial;}
   header,footer{position:sticky;z-index:5;background:#0b0b0b;border-bottom:1px solid var(--edge)}
   header{top:0} footer{bottom:0;border-bottom:none;border-top:1px solid var(--edge)}
-  .bar{max-width:1000px;margin:0 auto;padding:10px 12px;display:flex;align-items:center;gap:8px}
-  .title{font-family:"PressStart",monospace; letter-spacing:1px; font-size:12px}
+  .bar{max-width:1100px;margin:0 auto;padding:10px 12px;display:flex;align-items:center;gap:8px}
+  .title{font-family:"PressStart",monospace;letter-spacing:1px;font-size:12px}
   .badge{background:#222;border:2px solid #444;border-radius:6px;padding:6px 8px}
-  .main{max-width:1000px;margin:12px auto 90px;padding:0 12px;display:grid;gap:12px;grid-template-columns:1fr}
-  @media(min-width:960px){ .main{ grid-template-columns:1.25fr .75fr; } }
-  .card{background:var(--card);border:3px solid var(--edge);border-radius:10px;padding:12px;box-shadow:0 0 0 var(--pix) #000 inset}
+  .main{max-width:1100px;margin:12px auto 90px;padding:0 12px;display:grid;gap:12px;grid-template-columns:1fr}
+  @media(min-width:1024px){ .main{ grid-template-columns:1.25fr .85fr; } }
+  .card{background:var(--card);border:3px solid #333;border-radius:10px;padding:12px}
   .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  button{background:#1a1a1a;border:3px solid #333;color:#fff;padding:10px 12px;border-radius:8px;cursor:pointer;box-shadow:inset 0 -4px 0 rgba(0,0,0,.2);font-weight:700}
-  button:active{transform:translateY(1px); box-shadow:inset 0 -2px 0 rgba(0,0,0,.25)}
+  button{background:#1a1a1a;border:3px solid #333;color:#fff;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:700}
   .primary{background:var(--acc);border-color:#861010}
   .ghost{background:#151515}
   .pill{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:3px solid #333;border-radius:999px;background:#131313;color:#eee;text-decoration:none}
-  .ok{color:var(--ok)} .ng{color:var(--ng)}
-  .tiny{color:var(--sub);font-size:12px}
+  .ok{color:var(--ok)} .ng{color:var(--ng)} .tiny{color:var(--sub);font-size:12px}
   .qimg{max-height:220px;width:100%;object-fit:cover;border-radius:8px;border:3px solid #333;display:none}
   .opt{padding:10px;border:3px solid #333;border-radius:8px;cursor:pointer;background:#121212}
   .opt.correct{background:#0f2412;border-color:#1e4d2a}
   .opt.incorrect{background:#2a0f0f;border-color:#5a1f1f}
-  .list{display:grid;gap:8px;max-height:320px;overflow:auto}
+  .list{display:grid;gap:8px;max-height:330px;overflow:auto}
   .kpi{background:#0f0f0f;border:3px solid #333;border-radius:8px;padding:8px}
   .pack{display:flex;align-items:center;gap:8px;padding:8px;border:3px solid #333;border-radius:8px;background:#101010}
-  .yt{display:inline-flex;align-items:center;gap:6px}
-  .yt svg{width:16px;height:16px}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center}
   .dialog{max-width:900px;width:92%;max-height:85vh;overflow:auto;background:#0f0f0f;border:3px solid #333;border-radius:12px;padding:12px}
+  /* Start画面 */
+  #startOverlay{position:fixed;inset:0;background:
+    radial-gradient(1200px 600px at 50% -20%, rgba(215,26,26,.35), transparent),
+    #050505; display:flex;align-items:center;justify-content:center;z-index:9999;}
+  .startPanel{ text-align:center; }
+  .startTitle{ font-family:"PressStart",monospace; font-size:20px; margin:0 0 18px; letter-spacing:1px }
+  .startBtn{ font-family:"PressStart",monospace; padding:14px 22px; font-size:12px }
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .grp{border:2px dashed #444;border-radius:10px;padding:8px}
+  .grp h4{margin:0 0 6px}
+  label.cb{display:flex;align-items:center;gap:6px;padding:6px 8px;border:2px solid #333;border-radius:8px;background:#0f0f0f}
 </style>
 </head>
-<body class="crt">
+<body>
+
+<!-- Start / オープニング -->
+<div id="startOverlay">
+  <div class="startPanel">
+    <div class="startTitle">SOCIAL QUIZ</div>
+    <div class="card" style="min-width: 280px; text-align:left">
+      <h4 style="margin:6px 0 8px">ジャンルを選択（複数可）</h4>
+      <div class="grid3 tiny">
+        <div class="grp"><h4>歴史（H1〜H5）</h4>
+          <label class="cb"><input type="checkbox" data-cat value="H1" checked> 原始〜古代（H1）</label>
+          <label class="cb"><input type="checkbox" data-cat value="H2" checked> 平安（H2）</label>
+          <label class="cb"><input type="checkbox" data-cat value="H3" checked> 鎌倉〜室町（H3）</label>
+          <label class="cb"><input type="checkbox" data-cat value="H4" checked> 桃山〜江戸（H4）</label>
+          <label class="cb"><input type="checkbox" data-cat value="H5" checked> 近現代（H5）</label>
+        </div>
+        <div class="grp"><h4>地理（G）</h4>
+          <label class="cb"><input type="checkbox" data-cat value="G1" checked> 日本地理（G1）</label>
+          <label class="cb"><input type="checkbox" data-cat value="G2" checked> 世界地理（G2）</label>
+        </div>
+        <div class="grp"><h4>公民・資料（C/M）</h4>
+          <label class="cb"><input type="checkbox" data-cat value="C1" checked> 公民と政治（C1）</label>
+          <label class="cb"><input type="checkbox" data-cat value="C2" checked> 経済と国際（C2）</label>
+          <label class="cb"><input type="checkbox" data-cat value="M1" checked> 融合・資料読解（M1）</label>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <input id="qCount" type="number" min="30" max="300" value="300" style="width:110px;background:#0f0f0f;border:2px solid #333;border-radius:8px;color:#fff;padding:6px">
+        <button id="startBtn" class="startBtn primary">▶︎ START（BGMあり）</button>
+      </div>
+      <div class="tiny" style="margin-top:8px">※Startで8bit BGMを自動再生。いつでもミュートしたい場合は端末の音量を下げてください。</div>
+    </div>
+  </div>
+</div>
+
 <header>
   <div class="bar">
     <div class="title">SOCIAL QUIZ • RETRO</div>
-    <div class="badge">v2.0</div>
+    <div class="badge">v2.1</div>
     <div style="margin-left:auto" class="row">
-      <button id="refreshBtn" class="ghost">ローカル読込</button>
+      <button id="refreshBtn" class="ghost">新規300問を再生成</button>
       <button id="updateBtn" class="primary">オンライン更新（Wikipedia）</button>
-      <button id="musicBtn" class="ghost">♪ オープニング</button>
     </div>
   </div>
 </header>
@@ -75,19 +105,21 @@
 <main class="main">
   <section class="card" id="left"></section>
   <aside class="card" id="right">
-    <h3 style="margin:0 0 8px">パック</h3>
+    <h3 style="margin:0 0 8px">進捗 / バックアップ</h3>
+    <div id="progress"></div>
+    <h3 style="margin:12px 0 8px">パック（任意）</h3>
     <div id="packs" class="list tiny"></div>
   </aside>
 </main>
 
 <footer>
   <div class="bar tiny">
-    <div>データ：<code>data/packs/*.json</code> ／ PWA対応（ホーム画面追加OK）</div>
+    <div>データ：<code>data/seeds/*.json</code> → 自動で300問生成 ／ PWA対応（ホーム画面追加OK）</div>
   </div>
 </footer>
 
 <!-- 採点モーダル -->
-<div id="resultOverlay" class="overlay" aria-hidden="true">
+<div id="resultOverlay" class="overlay" style="display:none" aria-hidden="true">
   <div class="dialog">
     <h3>学習結果（今回）</h3>
     <div id="sum" class="row" style="margin:8px 0"></div>
@@ -99,39 +131,70 @@
 </div>
 
 <script>
-/* ================== PWA ================== */
+/* ========= PWA ========= */
 if ('serviceWorker' in navigator) {
   addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
 }
 
-/* ================== WebAudio（レトロ音） ================== */
-const SFX = (() => {
+/* ========= WebAudio（8bit BGM & SE） ========= */
+const AudioKit = (() => {
   const ctx = new (window.AudioContext||window.webkitAudioContext)();
-  const master = ctx.createGain(); master.gain.value = 0.2; master.connect(ctx.destination);
+  const master = ctx.createGain(); master.gain.value = 0.22; master.connect(ctx.destination);
 
-  function beep(freq=440, t=0.12, type='square'){
+  function tone(freq=440, t=0.12, type='square', v=0.7){
     const o=ctx.createOscillator(), g=ctx.createGain();
     o.type=type; o.frequency.value=freq; o.connect(g); g.connect(master);
-    g.gain.setValueAtTime(0.001, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime+0.01);
-    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+t);
-    o.start(); o.stop(ctx.currentTime+t+0.01);
+    const now=ctx.currentTime;
+    g.gain.setValueAtTime(0.0001, now);
+    g.gain.exponentialRampToValueAtTime(v, now+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+t);
+    o.start(now); o.stop(now+t+0.02);
   }
-  function chord(base=392){ // オープニング3和音
-    beep(base, 0.18); setTimeout(()=>beep(base*5/4,0.18),40); setTimeout(()=>beep(base*3/2,0.18),80);
-    setTimeout(()=>{beep(base*2,0.22)},180);
+  // 8bitループBGM（約5秒 / 120bpm / Cメジャー：アルペジオ＋ベース）
+  let bgmSeq=null;
+  function startBGM(){
+    stopBGM();
+    const bpm=120, beat=60/bpm;
+    bgmSeq = setInterval(()=>{
+      const base=261.6; // C4
+      // ベース
+      tone(base/2, beat*0.4,'square',0.5);
+      setTimeout(()=>tone(base*1.5/2, beat*0.4,'square',0.5), beat*500);
+      // アルペジオ
+      setTimeout(()=>tone(base, beat*0.18,'square',0.35), beat*100);
+      setTimeout(()=>tone(base*5/4, beat*0.18,'square',0.35), beat*200);
+      setTimeout(()=>tone(base*3/2, beat*0.18,'square',0.35), beat*300);
+      setTimeout(()=>tone(base*2, beat*0.18,'square',0.35), beat*400);
+      // リード（印象メロ）
+      setTimeout(()=>tone(523.25, beat*0.25,'triangle',0.45), beat*150);
+      setTimeout(()=>tone(659.25, beat*0.25,'triangle',0.45), beat*250);
+      setTimeout(()=>tone(783.99, beat*0.25,'triangle',0.45), beat*350);
+    }, beat*1000*4);
   }
-  return {
-    start: ()=>chord(392),
-    select: ()=>beep(660,0.06),
-    correct: ()=>{beep(880,0.08); setTimeout(()=>beep(1175,0.09,'triangle'),60)},
-    wrong: ()=>{beep(180,0.12,'square'); setTimeout(()=>beep(140,0.14,'square'),80)}
-  };
-})();
-document.getElementById('musicBtn').onclick = ()=> SFX.start();
+  function stopBGM(){ if(bgmSeq){ clearInterval(bgmSeq); bgmSeq=null; } }
 
-/* ================== State / Utility ================== */
-const APP='socquiz_v2_retro';
+  // SE
+  const sfx = {
+    select: ()=>tone(660,0.06,'square',0.5),
+    correct: ()=>{ tone(880,0.09,'square',0.6); setTimeout(()=>tone(1175,0.10,'triangle',0.6),80); }, // ピンポーン！
+    wrong: ()=>{ tone(196,0.12,'square',0.6); setTimeout(()=>tone(155,0.14,'square',0.6),90); } // ブッブー！
+  };
+  return { ctx, startBGM, stopBGM, sfx };
+})();
+
+/* ========= Start画面 ========= */
+const startOverlay = document.getElementById('startOverlay');
+document.getElementById('startBtn').onclick = async ()=>{
+  AudioKit.startBGM(); // 自動再生（ユーザ操作で解禁）
+  const cats = [...document.querySelectorAll('input[data-cat]:checked')].map(el=>el.value);
+  const total = Math.max(30, Math.min(300, parseInt(document.getElementById('qCount').value||300,10)));
+  await generateQuestions(cats, total); // ここで300問生成
+  startOverlay.style.display='none';
+  buildQueue(); mountQuestion(); renderRight();
+};
+
+/* ========= 状態管理 ========= */
+const APP='socquiz_v2_21';
 const store = {
   data: JSON.parse(localStorage.getItem(APP) || '{"cards":[],"stats":{"answered":0,"correct":0,"streak":0,"points":0},"session":[]}'),
   save(){ localStorage.setItem(APP, JSON.stringify(this.data)); },
@@ -141,88 +204,152 @@ function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.rando
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 function pct(a,b){return !b?0:Math.round(a/b*100);}
 
-/* ================== Pack読み込み（2.0継承） ================== */
-async function loadPackIndex(){
-  try{ const res=await fetch('./data/index.json?v='+Date.now(),{cache:'no-store'}); if(!res.ok) throw 0; return await res.json(); }
-  catch{ return []; }
-}
-async function loadPacks(selected){
-  const base='./data/packs/'; const loaded=[];
-  for(const p of selected){
-    try{ const r=await fetch(`${base}${p}.json?v=${Date.now()}`,{cache:'no-store'}); if(r.ok) loaded.push(...await r.json()); }catch{}
-  }
-  const ids=new Set((store.data.cards||[]).map(c=>String(c.id)));
-  const add=loaded.filter(q=>!ids.has(String(q.id))).map(q=>({
-    id:q.id, domain:q.domain||'総合', question_type:q.question_type||'mc',
-    question:q.question, choices:q.choices, answer:q.answer,
-    explanation:q.explanation||'', image:q.image||null,
-    source:q.source||{type:'pack',note:'packs'}, tags:q.tags||[]
-  }));
-  store.data.cards.push(...add); store.save(); return add.length;
-}
-async function renderPackUI(){
-  const list=await loadPackIndex(); const el=document.getElementById('packs');
-  el.innerHTML = list.length ? '' : '<div>data/index.json が見つかりません</div>';
-  list.forEach(p=>{
-    const id='pack_'+p.pack;
-    el.insertAdjacentHTML('beforeend', `
-      <label class="pack">
-        <input type="checkbox" id="${id}" data-pack="${p.pack}" ${p.recommended?'checked':''}
-               onclick="SFX.select()">
-        <div><b>${esc(p.title)}</b><br><span class="tiny">${esc(p.pack)} / ${p.count}問</span></div>
-      </label>
-    `);
-  });
-  const btn=document.createElement('button');
-  btn.textContent='選択パックを読み込む'; btn.className='primary';
-  btn.onclick=async()=>{ const packs=[...document.querySelectorAll('[id^="pack_"]:checked')].map(x=>x.dataset.pack);
-    const n=await loadPacks(packs);
-    if(n>0){ buildQueue(); mountQuestion(); alert(`${n}問を読み込みました`); } else { alert('新規はありません'); }
-  };
-  el.appendChild(btn);
-}
-
-/* ================== Wikipedia更新（2.0継承） ================== */
-const BOOST_TERMS = ['律令制','口分田','平清盛','日宋貿易','元寇','文永の役','弘安の役','町衆','問屋制家内工業','琵琶湖','パリ協定','社会保障','固定資産税','女性参政権','ABCD包囲網','三権分立','国民投票','小選挙区制','比例代表制','アンデス山脈','リマン海流','季節風','憲法改正','直接金融','公企業'];
-async function fetchWiki(term){
-  const url=`https://ja.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term)}`;
-  const res=await fetch(url,{headers:{accept:'application/json'}}); if(!res.ok) throw 0;
-  const j=await res.json();
-  return {title:j.title||term, extract:(j.extract||'').replace(/\s+/g,' ').trim(),
-          url: j.content_urls?.desktop?.page || `https://ja.wikipedia.org/wiki/${encodeURIComponent(term)}`,
-          thumb: j.thumbnail?.source || null};
-}
-function genMCFromSummary(term,sum){
-  const sent=(sum.extract||'').split('。')[0]||`${term}の基礎事項。`;
-  const pool=BOOST_TERMS.filter(t=>t!==term); const distractors=shuffle(pool).slice(0,3);
-  const choices=shuffle([term,...distractors]);
-  return { id:`web_${term}_${Math.random().toString(36).slice(2,7)}`, domain:'自動', question_type:'mc',
-    question:`${sent} ……この説明に当てはまる語句は？`,
-    choices, answer:term, explanation:`出典: Wikipedia「${sum.title}」要約から自動生成`, image:sum.thumb, source:{type:'url',url:sum.url} };
-}
-async function onlineUpdate(seed=BOOST_TERMS){
-  const results=[]; for(const t of seed){ try{ const s=await fetchWiki(t); results.push(genMCFromSummary(t,s)); }catch{} if(results.length>=20) break; }
-  const ids=new Set((store.data.cards||[]).map(c=>c.id)); const add=results.filter(q=>!ids.has(q.id));
-  store.data.cards.push(...add); store.save(); alert(`オンライン更新：${add.length}問を追加しました（Wikipedia要約）`);
-  render();
-}
-
-/* ================== YouTube（@eva11100）連携（1.0復活） ================== */
-/* ルール：
-   - 問題の正解語句や、question内の主要語を使って @eva11100 チャンネルの検索タブを開く
-   - ボタンは対象語が「歴史/年号/文化・地理の固有名」に該当するときに表示
+/* ========= シード読込 & 300問自動生成 ========= */
+/* シード形式（例）：
+  { "type":"event_year", "term":"元寇（文永の役）", "year":1274, "category":"H3", "hint":"鎌倉時代、最初の襲来" }
+  { "type":"term_def",   "term":"口分田", "definition":"律令制で6歳以上に支給された田地", "category":"H1" }
+  { "type":"geo_match",  "term":"兼六園", "definition":"金沢市の大名庭園（日本三名園）", "category":"G1" }
+  { "type":"civics",     "term":"生存権", "definition":"健康で文化的な最低限度の生活（憲法25条）", "category":"C1" }
 */
-const YT_CHANNEL_SEARCH = (q)=>`https://www.youtube.com/@eva11100/search?query=${encodeURIComponent(q)}`;
-function shouldShowYT(qobj){
-  const key = qobj.answer || '';
-  const hitTag = (qobj.domain||'').match(/歴史|地理|公民/) && (qobj.tags||[]).some(t=>/年号|文化|城|戦|幕府|貿易|山脈|海流|温泉|石川|加賀|金沢/i.test(t));
-  const keyHit = /[一-龥A-Za-z0-9]/.test(key) && (qobj.domain === '歴史' || /山脈|海流|城|幕府|戦|貿易|平清盛|元寇|律令|加賀|金沢|九谷|能登/.test(key));
-  return keyHit || hitTag;
+const SEED_FILES = [
+  'H1_ancient','H2_heian','H3_kamakura_muromachi','H4_edo','H5_modern',
+  'G1_japan_geo','G2_world_geo','C1_civics_politics','C2_econ_international','M1_data_reading'
+];
+async function loadSeeds(filterCats=null){
+  const base='./data/seeds/';
+  const use = filterCats? SEED_FILES.filter(n=>filterCats.some(c=>n.startsWith(c))) : SEED_FILES;
+  let pool=[];
+  for(const name of use){
+    try{
+      const r=await fetch(base+name+'.json?v='+Date.now(),{cache:'no-store'});
+      if(r.ok){ const j=await r.json(); pool.push(...j); }
+    }catch{}
+  }
+  return pool;
+}
+function mcFromYear(seed, distractorPool){
+  const correct = String(seed.year);
+  const near = distractorPool
+    .filter(s=>s.type==='event_year' && s.category===seed.category && s.term!==seed.term)
+    .map(s=>String(s.year));
+  const choices = shuffle([correct, ...shuffle(near).slice(0,3)]);
+  return {
+    id: `y_${seed.category}_${seed.term}_${seed.year}`,
+    category: seed.category, domain:'歴史', question_type:'mc', difficulty:2,
+    question: `${seed.term}が起こった西暦は？`,
+    choices, answer: correct,
+    explanation: seed.hint || '年号は並べ替え問題でも頻出。',
+    tags:[seed.term,'年号']
+  };
+}
+function mcFromDef(seed, distractorPool){
+  const correct = seed.term;
+  const near = distractorPool
+    .filter(s=>s.type===seed.type && s.category===seed.category && s.term!==seed.term)
+    .map(s=>s.term);
+  const choices = shuffle([correct, ...shuffle(near).slice(0,3)]);
+  return {
+    id:`t_${seed.category}_${seed.term}`,
+    category: seed.category, domain: (seed.category.startsWith('G')?'地理':seed.category.startsWith('C')?'公民':'歴史'),
+    question_type:'mc', difficulty:1,
+    question:`「${seed.definition}」に当てはまる語句は？`,
+    choices, answer: correct,
+    explanation: seed.hint || '用語の定義を正確に覚えよう。',
+    tags:[seed.term]
+  };
+}
+function mcFromMatch(seed, distractorPool){
+  // 地理・資料読解で用語⇄説明の逆引き
+  const correct = seed.definition;
+  const near = distractorPool
+    .filter(s=>s.type===seed.type && s.category===seed.category && s.term!==seed.term)
+    .map(s=>s.definition);
+  const choices = shuffle([correct, ...shuffle(near).slice(0,3)]);
+  return {
+    id:`g_${seed.category}_${seed.term}`,
+    category: seed.category, domain: (seed.category.startsWith('G')?'地理':'融合'),
+    question_type:'mc', difficulty:2,
+    question:`${seed.term}の説明として最も適切なのは？`,
+    choices, answer: correct,
+    explanation: seed.hint || '紛らわしい用語と区別しよう。',
+    tags:[seed.term]
+  };
+}
+function makeMC(seed, all){
+  if(seed.type==='event_year') return mcFromYear(seed, all);
+  if(seed.type==='term_def' || seed.type==='civics') return mcFromDef(seed, all);
+  if(seed.type==='geo_match') return mcFromMatch(seed, all);
+  // fallback
+  return mcFromDef(seed, all);
+}
+async function generateQuestions(categories, totalCount){
+  const seeds = await loadSeeds(categories);
+  if(!seeds.length){ alert('シードが読み込めませんでした（data/seeds 配置を確認）'); return; }
+  // カテゴリごとの配分（歴史比率高め）
+  const baseShare = {
+    H1: 0.12, H2: 0.08, H3: 0.12, H4: 0.14, H5: 0.14, // 歴史 合計0.60
+    G1: 0.10, G2: 0.10, // 地理 0.20
+    C1: 0.08, C2: 0.06, // 公民 0.14
+    M1: 0.06           // 資料 0.06
+  };
+  const selected = categories.length? categories : Object.keys(baseShare);
+  const totalShare = selected.reduce((s,c)=>s+(baseShare[c]||0),0) || 1;
+  const targets = Object.fromEntries(selected.map(c=>{
+    const n = Math.max(5, Math.round(totalCount * (baseShare[c]||0)/totalShare));
+    return [c,n];
+  }));
+  const byCat = s=>seeds.filter(x=>x.category===s);
+  let cards=[];
+  for(const cat of selected){
+    const pool = byCat(cat);
+    const want = targets[cat]||0;
+    // シード不足時は他catから補完
+    const use = pool.length? shuffle(pool).slice(0, Math.min(pool.length, want)) : [];
+    const gen = use.map(seed=>makeMC(seed, pool));
+    // 足りない分は同カテゴリから重複許容で追加
+    while(gen.length < want && pool.length){
+      const seed = pool[Math.floor(Math.random()*pool.length)];
+      gen.push(makeMC(seed, pool));
+    }
+    cards.push(...gen);
+  }
+  // 全体の不足を全種から補完
+  while(cards.length < totalCount){
+    const seed = seeds[Math.floor(Math.random()*seeds.length)];
+    cards.push(makeMC(seed, seeds));
+  }
+  // 仕上げ：ID重複解消
+  const uniq = []; const seen=new Set();
+  for(const c of cards){
+    let id = c.id, k=1;
+    while(seen.has(id)){ id = c.id+'_'+(++k); }
+    c.id=id; seen.add(id);
+    // YouTube用のメタを軽く
+    c.source = c.source || {type:'seed', note:c.category};
+    c.tags = c.tags || [];
+  }
+  store.data.cards = uniq.concat(cards); // uniqは空だが将来の重複排除用
+  store.data.stats = {answered:0,correct:0,streak:0,points:0};
+  store.data.session=[];
+  store.save();
 }
 
-/* ================== Quiz Engine（1.0の挙動維持：回答→解説で停止） ================== */
+/* ========= YouTubeリンク ========= */
+const ytChannelSearch = q => `https://www.youtube.com/@eva11100/search?query=${encodeURIComponent(q)}`;
+const ytGeneralSearch = q => `https://www.youtube.com/results?search_query=${encodeURIComponent(q+' 高校入試 社会')}`;
+function ytButtonsFor(qobj){
+  const key = qobj.answer || qobj.question || '';
+  if(!/[一-龥A-Za-z0-9]/.test(key)) return '';
+  const q = key.replace(/（.*?）/g,'');
+  return `
+    <a class="pill" target="_blank" rel="noopener" href="${ytChannelSearch(q)}">▶ チャンネルで学ぶ</a>
+    <a class="pill" target="_blank" rel="noopener" href="${ytGeneralSearch(q)}">▶ YouTubeで検索</a>
+  `;
+}
+
+/* ========= Quiz Engine（回答→解説で停止） ========= */
 let queue=[], current=null;
-function buildQueue(){ queue = shuffle([...store.data.cards]).slice(0,30); }
+function buildQueue(){ queue = shuffle([...store.data.cards]); }
 function mountQuestion(){
   const L=document.getElementById('left');
   if(!current){ current = queue.shift() || store.data.cards[Math.floor(Math.random()*store.data.cards.length)]; }
@@ -230,30 +357,21 @@ function mountQuestion(){
   const ops = Array.isArray(c.choices)
     ? c.choices.map(ch=>`<label class="opt"><input type="radio" name="choice" value="${esc(ch)}"> ${esc(ch)}</label>`).join('')
     : `<input id="free" type="text" placeholder="解答を入力">`;
-
-  const ytBtn = shouldShowYT(c)
-    ? `<a class="pill yt" target="_blank" rel="noopener" href="${YT_CHANNEL_SEARCH(c.answer||c.question)}" title="チャンネル内で関連動画を検索">
-         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 16.5l6-4.5-6-4.5v9z"></path><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-0.9C16.7 5 12 5 12 5h0s-4.7 0-7 .1c-.4 0-1.3.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.3v1.3C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.5.1 6.9.1 6.9.1s4.7 0 7-.1c.4 0 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.3C22 9.6 21.8 8 21.8 8z"></path></svg>
-         再生
-       </a>` : '';
-
   L.innerHTML = `
-    <div class="tiny">出典: ${esc(c.source?.url||c.source?.note||'local')}</div>
+    <div class="tiny">カテゴリ: ${esc(c.category)} ／ 出典: ${esc(c.source?.note||'seed')}</div>
     <h3 style="margin:.2rem 0 0.8rem">${esc(c.question)}</h3>
-    <img class="qimg" id="qimg" src="${c.image||''}" style="display:${c.image?'block':'none'}">
     <div id="ops" class="list">${ops}</div>
     <div class="row" style="margin-top:10px">
       <button class="primary" id="answerBtn">回答する</button>
       <button class="ghost" id="skipBtn">スキップ</button>
       <button class="pill" id="gradeBtn">採点する</button>
-      ${ytBtn}
-      ${c.source?.url?`<a class="pill" href="${c.source.url}" target="_blank" rel="noopener">参考リンク</a>`:''}
+      ${ytButtonsFor(c)}
     </div>
     <div id="fb" style="margin-top:10px"></div>
   `;
   renderRight();
   document.getElementById('answerBtn').onclick = checkAnswer;
-  document.getElementById('skipBtn').onclick   = ()=>{ current=null; SFX.select(); mountQuestion(); };
+  document.getElementById('skipBtn').onclick   = ()=>{ current=null; AudioKit.sfx.select(); mountQuestion(); };
   document.getElementById('gradeBtn').onclick  = openResults;
 }
 function checkAnswer(){
@@ -274,13 +392,11 @@ function checkAnswer(){
     ua=(document.getElementById('free').value||'').trim();
   }
   const ok = String(ua)===String(c.answer);
-  if(ok){ store.data.stats.correct++; store.data.stats.streak++; store.data.stats.points+=10; SFX.correct(); }
-  else { store.data.stats.streak=0; SFX.wrong(); }
+  if(ok){ store.data.stats.correct++; store.data.stats.streak++; store.data.stats.points+=10; AudioKit.sfx.correct(); }
+  else  { store.data.stats.streak=0; AudioKit.sfx.wrong(); }
   store.data.stats.answered++;
-  store.data.session.push({q:c.question, ua, ans:c.answer, ok, explain:c.explanation||'', src:c.source?.url||c.source?.note||''});
+  store.data.session.push({q:c.question, ua, ans:c.answer, ok, explain:c.explanation||'', cat:c.category});
   store.save();
-
-  // ★解説を表示し、ここで停止（1.0の挙動）
   fb.innerHTML = `
     <div class="${ok?'ok':'ng'}">${ok?'🎉 正解！ +10pt':'💡 不正解……'}</div>
     <div class="tiny">解説：${esc(c.explanation||'—')}</div>
@@ -294,31 +410,30 @@ function checkAnswer(){
   renderRight();
 }
 
-/* ================== 右パネル（進捗・バックアップ） ================== */
+/* ========= 右パネル ========= */
 function renderRight(){
   const s=store.data.stats, R=document.getElementById('right');
   R.innerHTML = `
-    <h3>進捗</h3>
-    <div class="row">
-      <div class="kpi">解いた数：${s.answered}</div>
-      <div class="kpi">正解数：${s.correct}</div>
-      <div class="kpi">正答率：${pct(s.correct, s.answered)}%</div>
-      <div class="kpi">連続正解：${s.streak}</div>
-      <div class="kpi">ポイント：${s.points}</div>
+    <div id="progress">
+      <div class="row">
+        <div class="kpi">解いた数：${s.answered}</div>
+        <div class="kpi">正解数：${s.correct}</div>
+        <div class="kpi">正答率：${pct(s.correct, s.answered)}%</div>
+        <div class="kpi">連続正解：${s.streak}</div>
+        <div class="kpi">ポイント：${s.points}</div>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button class="ghost" onclick="store.reset()">全データ削除</button>
+        <button class="ghost" id="backup">バックアップ</button>
+        <input type="file" id="restoreFile" style="display:none" accept="application/json">
+        <button class="ghost" id="restoreBtn">復元</button>
+      </div>
     </div>
-    <h3 style="margin-top:12px">操作</h3>
-    <div class="row">
-      <button class="ghost" onclick="store.reset()">全データ削除</button>
-      <button class="ghost" id="backup">バックアップ</button>
-      <input type="file" id="restoreFile" style="display:none" accept="application/json">
-      <button class="ghost" id="restoreBtn">復元</button>
-    </div>
-    <h3 style="margin-top:12px">パック</h3>
     <div id="packs" class="list tiny"></div>
   `;
   document.getElementById('backup').onclick=()=>{
     const blob = new Blob([JSON.stringify(store.data,null,2)],{type:'application/json'});
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='socquiz_v2_backup.json'; a.click();
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='socquiz_v21_backup.json'; a.click();
   };
   document.getElementById('restoreBtn').onclick=()=>{
     const f=document.getElementById('restoreFile'); f.onchange=()=>{
@@ -330,22 +445,67 @@ function renderRight(){
   renderPackUI();
 }
 
-/* ================== 採点モーダル（2.0継承） ================== */
+/* ========= パックUI（任意） ========= */
+async function loadPackIndex(){
+  try{ const res=await fetch('./data/index.json?v='+Date.now(),{cache:'no-store'}); if(!res.ok) throw 0; return await res.json(); }
+  catch{ return []; }
+}
+async function loadPacks(selected){
+  const base='./data/packs/'; const loaded=[];
+  for(const p of selected){
+    try{ const r=await fetch(`${base}${p}.json?v=${Date.now()}`,{cache:'no-store'}); if(r.ok) loaded.push(...await r.json()); }catch{}
+  }
+  const ids=new Set((store.data.cards||[]).map(c=>String(c.id)));
+  const add=loaded.filter(q=>!ids.has(String(q.id))).map(q=>({
+    id:q.id, category:q.category||'M1', domain:q.domain||'総合', question_type:q.question_type||'mc',
+    question:q.question, choices:q.choices, answer:q.answer,
+    explanation:q.explanation||'', image:q.image||null,
+    source:q.source||{type:'pack',note:'packs'}, tags:q.tags||[]
+  }));
+  store.data.cards.push(...add); store.save(); return add.length;
+}
+async function renderPackUI(){
+  const list=await loadPackIndex(); const el=document.getElementById('packs');
+  el.innerHTML = list.length ? '' : '<div>任意の追加パックを data/index.json に登録できます。</div>';
+  list.forEach(p=>{
+    const id='pack_'+p.pack;
+    el.insertAdjacentHTML('beforeend', `
+      <label class="pack">
+        <input type="checkbox" id="${id}" data-pack="${p.pack}" ${p.recommended?'checked':''}
+               onclick="AudioKit.sfx.select()">
+        <div><b>${esc(p.title)}</b><br><span class="tiny">${esc(p.pack)} / ${p.count}問</span></div>
+      </label>
+    `);
+  });
+  const btn=document.createElement('button');
+  btn.textContent='選択パックを読み込む'; btn.className='primary';
+  btn.onclick=async()=>{ const packs=[...document.querySelectorAll('[id^="pack_"]:checked')].map(x=>x.dataset.pack);
+    const n=await loadPacks(packs);
+    if(n>0){ buildQueue(); mountQuestion(); alert(`${n}問を読み込みました`); } else { alert('新規はありません'); }
+  };
+  el.appendChild(btn);
+}
+
+/* ========= 採点モーダル ========= */
 function openResults(){
   const ov=document.getElementById('resultOverlay'), sum=document.getElementById('sum'), hist=document.getElementById('hist');
   const S=store.data.stats, H=store.data.session;
   sum.innerHTML = `<div class="kpi">今回の問題数：${H.length}</div>
                    <div class="kpi">正解：${H.filter(x=>x.ok).length}</div>
                    <div class="kpi">正答率：${pct(H.filter(x=>x.ok).length,H.length)}%</div>`;
-  hist.innerHTML = H.length? H.map((r,i)=>`<div><strong>${i+1}. ${esc(r.q)}</strong><br>あなた：${esc(r.ua||'—')} / 正解：${esc(r.ans)}<br>解説：${esc(r.explain||'—')} ${r.src?`<a class="pill" href="${r.src}" target="_blank" rel="noopener">参考</a>`:''}</div>`).join('') : '<div>まだ回答がありません。</div>';
+  hist.innerHTML = H.length? H.map((r,i)=>`<div><strong>${i+1}. [${esc(r.cat)}] ${esc(r.q)}</strong><br>あなた：${esc(r.ua||'—')} / 正解：${esc(r.ans)}<br>解説：${esc(r.explain||'—')}</div>`).join('') : '<div>まだ回答がありません。</div>';
   ov.style.display='flex'; ov.setAttribute('aria-hidden','false');
   document.getElementById('closeResult').onclick=()=>{ ov.style.display='none'; ov.setAttribute('aria-hidden','true'); };
 }
 
-/* ================== Boot ================== */
-document.getElementById('refreshBtn').onclick = ()=>{ if(store.data.cards.length){ buildQueue(); mountQuestion(); } else { alert('まずは右の「選択パックを読み込む」を押してください'); } };
-document.getElementById('updateBtn').onclick  = ()=> onlineUpdate();
-(function init(){ renderRight(); SFX.start(); })();
+/* ========= 入口の補助ボタン ========= */
+document.getElementById('refreshBtn').onclick = async ()=>{
+  const cats = [...document.querySelectorAll('input[data-cat]:checked')].map(el=>el.value);
+  await generateQuestions(cats, 300);
+  buildQueue(); mountQuestion(); renderRight();
+};
+document.getElementById('updateBtn').onclick  = ()=> alert('Wikipedia自動追加は別途パックとして併用OKです。');
+
 </script>
 </body>
 </html>
