@@ -103,7 +103,10 @@
 </header>
 
 <main class="main">
-  <section class="card" id="left"></section>
+  <section class="card" id="left">
+   <!-- 問題用画像（Wikipediaサムネが入る） -->
+    <div id="qimage" class="q-media"></div>
+  </section>
   <aside class="card" id="right">
     <h3 style="margin:0 0 8px">進捗 / バックアップ</h3>
     <div id="progress"></div>
@@ -185,13 +188,90 @@ const AudioKit = (() => {
 /* ========= Start画面 ========= */
 const startOverlay = document.getElementById('startOverlay');
 document.getElementById('startBtn').onclick = async ()=>{
-  // AudioKit.startBGM(); // 旧BGMはコメントアウトで削除しました
+  // AudioKit.startBGM(); // 旧BGMはコメントアウトで削除済
   const cats = [...document.querySelectorAll('input[data-cat]:checked')].map(el=>el.value);
   const total = Math.max(30, Math.min(300, parseInt(document.getElementById('qCount').value||300,10)));
   await generateQuestions(cats, total); // ここで300問生成
   startOverlay.style.display='none';
   buildQueue(); mountQuestion(); renderRight();
 };
+
+/* ========= 画像ユーティリティ（Wikipediaのみ・キー不要） ========= */
+// 要約APIから素早くサムネ取得
+async function wikiSummaryThumb(lang, title){
+  const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` + encodeURIComponent(title);
+  try{
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if(!res.ok) return null;
+    const data = await res.json();
+    return data?.thumbnail?.source || null;
+  }catch{ return null; }
+}
+// 日本語→英語の順で探す（必要最低限）
+async function fetchImageURL(query){
+  if(!query) return null;
+  let src = await wikiSummaryThumb('ja', query);
+  if(!src) src = await wikiSummaryThumb('en', query);
+  return src || null;
+}
+// 問題文から簡易キーワード抽出（mediaQueryが無い時の保険）
+function guessQueryFromQuestion(text){
+  const t = String(text||'').replace(/[「」『』【】（）()［］\[\]、。・：:;!?！？…\.,"'`]/g,'').trim();
+  return t.slice(0, 18);
+}
+// 画像を#qimageに描画
+async function renderQuestionImage(q){
+  const box = document.getElementById('qimage');
+  if(!box) return;
+  box.style.display = 'none';
+  box.innerHTML = '';
+
+  const query = (q.mediaQuery && q.mediaQuery.trim()) || guessQueryFromQuestion(q.question);
+  const src = await fetchImageURL(query);
+  if(!src) return;
+
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = q.question || query;
+  box.appendChild(img);
+  box.style.display = 'block';
+}
+
+/* ========= Quiz Engine（回答→解説で停止） ========= */
+// ※ 既存の mountQuestion をこの版に差し替え
+function mountQuestion(){
+  const L=document.getElementById('left');
+  if(!current){
+    current = queue.shift() || store.data.cards[Math.floor(Math.random()*store.data.cards.length)];
+  }
+  const c=current;
+
+  const ops = Array.isArray(c.choices)
+    ? c.choices.map(ch=>`<label class="opt"><input type="radio" name="choice" value="${esc(ch)}"> ${esc(ch)}</label>`).join('')
+    : `<input id="free" type="text" placeholder="解答を入力">`;
+
+  L.innerHTML = `
+    <div class="tiny">カテゴリ: ${esc(c.category)} ／ 出典: ${esc(c.source?.note||'seed')}</div>
+    <h3 style="margin:.2rem 0 0.8rem">${esc(c.question)}</h3>
+    <div id="ops" class="list">${ops}</div>
+    <div class="row" style="margin-top:10px">
+      <button class="primary" id="answerBtn">回答する</button>
+      <button class="ghost" id="skipBtn">スキップ</button>
+      <button class="pill" id="gradeBtn">採点する</button>
+      ${ytButtonsFor(c)}
+    </div>
+    <div id="fb" style="margin-top:10px"></div>
+  `;
+
+  renderRight();
+
+  // ★ 画像をここで表示（問題文＆選択肢が確定した後）
+  renderQuestionImage(c);
+
+  document.getElementById('answerBtn').onclick = checkAnswer;
+  document.getElementById('skipBtn').onclick   = ()=>{ current=null; AudioKit.sfx.select(); mountQuestion(); };
+  document.getElementById('gradeBtn').onclick  = openResults;
+}
 
 /* ========= 状態管理 ========= */
 const APP='socquiz_v2_21';
