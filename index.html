@@ -268,17 +268,20 @@ function mountQuestion(){
     : `<input id="free" type="text" placeholder="解答を入力">`;
 
   L.innerHTML = `
-    <div class="tiny">カテゴリ: ${esc(c.category)} ／ 出典: ${esc(c.source?.note||'seed')}</div>
-    <h3 style="margin:.2rem 0 0.8rem">${esc(c.question)}</h3>
-    <div id="ops" class="list">${ops}</div>
-    <div class="row" style="margin-top:10px">
-      <button class="primary" id="answerBtn">回答する</button>
-      <button class="ghost" id="skipBtn">スキップ</button>
-      <button class="pill" id="gradeBtn">採点する</button>
-      ${ytButtonsFor(c)}
-    </div>
-    <div id="fb" style="margin-top:10px"></div>
-  `;
+  <!-- ← ここで毎回 qimage を生成して維持する -->
+  <div id="qimage" class="q-media"></div>
+
+  <div class="tiny">カテゴリ: ${esc(c.category)} ／ 出典: ${esc(c.source?.note||'seed')}</div>
+  <h3 style="margin:.2rem 0 0.8rem">${esc(c.question)}</h3>
+  <div id="ops" class="list">${ops}</div>
+  <div class="row" style="margin-top:10px">
+    <button class="primary" id="answerBtn">回答する</button>
+    <button class="ghost" id="skipBtn">スキップ</button>
+    <button class="pill" id="gradeBtn">採点する</button>
+    ${ytButtonsFor(c)}
+  </div>
+  <div id="fb" style="margin-top:10px"></div>
+`;
 
   renderRight();
 
