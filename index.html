@@ -57,7 +57,15 @@
 </style>
 </head>
 <body>
-
+<script>
+  const bgm = new Audio('assets/music/main_bgm.mp3');
+  bgm.loop = true;
+  bgm.volume = 0.28; // 初期音量
+  document.getElementById('btnStart').addEventListener('click', () => {
+    bgm.play().catch(e => console.log('再生できません:', e));
+  });
+</script>
+  
 <!-- Start / オープニング -->
 <div id="startOverlay">
   <div class="startPanel">
