@@ -57,14 +57,6 @@
 </style>
 </head>
 <body>
-<script>
-  const bgm = new Audio('assets/music/main_bgm.mp3');
-  bgm.loop = true;
-  bgm.volume = 0.28; // 初期音量
-  document.getElementById('btnStart').addEventListener('click', () => {
-    bgm.play().catch(e => console.log('再生できません:', e));
-  });
-</script>
   
 <!-- Start / オープニング -->
 <div id="startOverlay">
@@ -516,4 +508,12 @@ document.getElementById('updateBtn').onclick  = ()=> alert('Wikipedia自動追�
 
 </script>
 </body>
+<script>
+  const bgm = new Audio('assets/music/main_bgm.mp3');
+  bgm.loop = true;
+  bgm.volume = 0.28; // 初期音量
+  document.getElementById('btnStart').addEventListener('click', () => {
+    bgm.play().catch(e => console.log('再生できません:', e));
+  });
+</script>
 </html>
