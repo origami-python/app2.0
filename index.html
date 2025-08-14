@@ -509,9 +509,10 @@ document.getElementById('updateBtn').onclick  = ()=> alert('Wikipedia自動追�
 </script>
 </body>
 <script>
-  const bgm = new Audio('assets/music/main_bgm.mp3');
+  // キャッシュバスター（?v=日時）を付けて古いファイルを回避
+  const bgm = new Audio('assets/music/main_bgm.mp3?v=' + Date.now());
   bgm.loop = true;
-  bgm.volume = 0.28; // 初期音量
+  bgm.volume = 0.28;
   document.getElementById('btnStart').addEventListener('click', () => {
     bgm.play().catch(e => console.log('再生できません:', e));
   });
