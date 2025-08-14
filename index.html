@@ -54,6 +54,23 @@
   .grp{border:2px dashed #444;border-radius:10px;padding:8px}
   .grp h4{margin:0 0 6px}
   label.cb{display:flex;align-items:center;gap:6px;padding:6px 8px;border:2px solid #333;border-radius:8px;background:#0f0f0f}
+/* 画像ボックス（Wikipediaサムネ用） */
+.q-media{
+  width:100%;
+  max-height:28vh;          /* スマホ縦で1画面に収める高さ */
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid #2a2a2a;
+  background:#0e0e0e;
+  display:none;             /* 画像が来た時だけ開く */
+  margin-bottom:10px;
+}
+.q-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 </style>
 </head>
 <body>
@@ -450,6 +467,9 @@ function mountQuestion(){
     <div id="fb" style="margin-top:10px"></div>
   `;
   renderRight();
+    // ← ここで画像を表示（問題文と選択肢が確定したあと）
+  renderQuestionImage(c);
+  
   document.getElementById('answerBtn').onclick = checkAnswer;
   document.getElementById('skipBtn').onclick   = ()=>{ current=null; AudioKit.sfx.select(); mountQuestion(); };
   document.getElementById('gradeBtn').onclick  = openResults;
