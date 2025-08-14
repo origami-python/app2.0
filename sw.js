@@ -1,34 +1,38 @@
-const CACHE = 'socquiz-v2.0.1';
-const CORE = [
-  './',
-  './index.html',
-  './manifest.webmanifest',
-  './assets/icon512.png',
-  './data/index.json'
-];
-// assets以下の任意ファイル（画像/効果音）もキャッシュ対象にする
-self.addEventListener('install', e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)));
-  self.skipWaiting();
-});
-self.addEventListener('activate', e=>{
-  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k!==CACHE && caches.delete(k)))));
-  self.clients.claim();
-});
-self.addEventListener('fetch', e=>{
-  const u = new URL(e.request.url);
-  const allow = ['https://ja.wikipedia.org'];
-  const isLocal = (u.origin === location.origin);
-  if (isLocal || allow.some(d=>u.origin.startsWith(d))) {
-    e.respondWith(
-      caches.match(e.request).then(cached=>{
-        const fetcher = fetch(e.request).then(res=>{
-          // data/packs/ や assets/ も順次キャッシュ
-          caches.open(CACHE).then(c=>c.put(e.request, res.clone()));
-          return res;
-        }).catch(()=>cached);
-        return cached || fetcher;
-      })
-    );
-  }
-});
+async function wikiSummaryThumb(lang, title){
+  const url = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/` + encodeURIComponent(title);
+  try{
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if(!res.ok) return null;
+    const data = await res.json();
+    return data?.thumbnail?.source || null;
+  }catch{ return null; }
+}
+
+async function fetchImageURL(query){
+  if(!query) return null;
+  let src = await wikiSummaryThumb('ja', query);
+  if(!src) src = await wikiSummaryThumb('en', query);
+  return src || null;
+}
+
+function guessQueryFromQuestion(text){
+  const t = text.replace(/[「」『』【】（）()［］\[\]、。・：:;!?！？…\.,"'`]/g,'').trim();
+  return t.slice(0, 18);
+}
+
+async function renderQuestionImage(q){
+  const box = document.getElementById('qimage');
+  if(!box) return;
+  box.style.display = 'none';
+  box.innerHTML = '';
+
+  const query = q.mediaQuery?.trim() || guessQueryFromQuestion(q.question);
+  const src = await fetchImageURL(query);
+  if(!src) return;
+
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = q.question || query;
+  box.appendChild(img);
+  box.style.display = 'block';
+}
