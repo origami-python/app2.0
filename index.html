@@ -508,13 +508,51 @@ document.getElementById('updateBtn').onclick  = ()=> alert('Wikipedia自動追�
 
 </script>
 <script>
-  // キャッシュバスター（?v=日時）を付けて古いファイルを回避
-  const bgm = new Audio('assets/music/main_bgm.mp3?v=' + Date.now());
+(function(){
+  // 1) どのページ構成でも動く「最初のユーザー操作で一度だけ再生」
+  const src = 'assets/music/main_bgm.mp3?v=' + Date.now(); // キャッシュバスター
+  const bgm = new Audio(src);
   bgm.loop = true;
-  bgm.volume = 0.28;
-  document.getElementById('btnStart').addEventListener('click', () => {
-    bgm.play().catch(e => console.log('再生できません:', e));
+  bgm.volume = 0.32; // 0〜1
+
+  // デバッグログ（F12のConsoleで見えます）
+  ['loadstart','loadedmetadata','canplay','canplaythrough','play','pause','ended','error'].forEach(ev=>{
+    bgm.addEventListener(ev, e => console.log('[BGM]', ev, e));
   });
+
+  // 2) 初回クリック/タップをフック（iOS/Safari対応：同期ハンドラ内で直接play）
+  let armed = true;
+  function armPlayOnce(){
+    if (!armed) return;
+    armed = false;
+    try {
+      bgm.play().then(()=> {
+        console.log('[BGM] started:', src);
+      }).catch(err=>{
+        console.warn('[BGM] play failed:', err);
+        alert('BGMの再生に失敗しました。音量/サイレントモード/ブラウザ設定を確認してください。');
+      });
+    } catch (e) {
+      console.warn('[BGM] play threw:', e);
+    }
+    // 以降のクリックでは無効
+    window.removeEventListener('pointerdown', armPlayOnce, true);
+    window.removeEventListener('keydown', armPlayOnce, true);
+  }
+  window.addEventListener('pointerdown', armPlayOnce, true);
+  window.addEventListener('keydown', armPlayOnce, true);
+
+  // 3) 既存のStartボタンにも（あれば）結びつける
+  function bindStart(id){
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', armPlayOnce, { once:false, capture:true });
+  }
+  ['startBtn','btnStart','start','play','begin'].forEach(bindStart);
+
+  // 4) 画面が差し替わるアプリ用に、DOM変化を監視してボタンを後追いで結び直す
+  const mo = new MutationObserver(()=> ['startBtn','btnStart','start','play','begin'].forEach(bindStart));
+  mo.observe(document.documentElement, { childList:true, subtree:true });
+})();
 </script>
 </body>
 </html>
