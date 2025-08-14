@@ -185,7 +185,7 @@ const AudioKit = (() => {
 /* ========= Start画面 ========= */
 const startOverlay = document.getElementById('startOverlay');
 document.getElementById('startBtn').onclick = async ()=>{
-  AudioKit.startBGM(); // 自動再生（ユーザ操作で解禁）
+  // AudioKit.startBGM(); // 旧BGMはコメントアウトで削除しました
   const cats = [...document.querySelectorAll('input[data-cat]:checked')].map(el=>el.value);
   const total = Math.max(30, Math.min(300, parseInt(document.getElementById('qCount').value||300,10)));
   await generateQuestions(cats, total); // ここで300問生成
